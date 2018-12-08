@@ -1,0 +1,12 @@
+{
+	"name": "ckeditor/notification",
+	"description": "Notification Plugin for CKEditor Editor",
+	"version": "4.7.3",
+	"type": "drupal-library",
+	"keywords": [ "ckeditor", "editor", "wysiwyg", "html", "richtext", "text", "javascript" ],
+	"homepage": "https://ckeditor.com/cke4/addon/notification",
+	"license": [ "MIT" ],
+	"support": {
+		"source": "https://github.com/ckeditor/ckeditor-dev/tree/master/plugins/notification"
+	}
+}

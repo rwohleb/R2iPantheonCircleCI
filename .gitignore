@@ -9,6 +9,7 @@
 /web/modules/contrib/
 /web/themes/contrib/
 /web/profiles/contrib/
+/web/libraries/
 /web/private/scripts/quicksilver
 
 # Ignore scaffold files
@@ -39,6 +40,11 @@ web/web.config
 # repository as a custom upstream. The .gitignore file
 # is not modified in the GitHub PR workflow.
 
+# Ignore compiled assets
+web/themes/custom/centrify/css
+web/themes/custom/centrify/js
+web/themes/custom/centrify/fonts
+web/themes/custom/centrify/images
 
 # :::::::::::::::::::::: cut ::::::::::::::::::::::
 
@@ -59,6 +65,12 @@ web/sites/default/files
 web/sites/*/settings.local.php
 web/sites/*/services*.yml
 !web/sites/*/services.pantheon.*.yml
+
+# Ignore drush local config
+web/sites/default/local.drush.yml
+
+# Ignore NodeJS packages
+node_modules
 
 # Ignore SimpleTest multi-site environment.
 web/sites/simpletest
@@ -100,3 +112,13 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+# PHPlint #
+###########
+.phplint-cache
+
+# Ignore the app directory if it appears.
+app
+
+# Ignore temp files.
+*.tmp

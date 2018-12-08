@@ -1,0 +1,69 @@
+name: R2iPantheonCircleCI
+recipe: pantheon
+config:
+  framework: drupal8
+  site: r2ipantheoncircleci
+  id: 529c9f31-8c72-4324-bd93-e9182f19d5e0
+services:
+  appserver:
+    run:
+      - mkdir -p ~/.terminus/plugins
+      - composer create-project -d ~/.terminus/plugins pantheon-systems/terminus-build-tools-plugin:^2.0.0-beta1
+      - composer create-project -d ~/.terminus/plugins pantheon-systems/terminus-rsync-plugin:~1
+      - cd /var/www/html/vendor/pantheon-systems/terminus && composer update
+      - cd ~/.terminus/plugins/terminus-build-tools-plugin && composer update
+      - cd ~/.terminus/plugins/terminus-rsync-plugin && composer update
+    overrides:
+      services:
+        environment:
+          BEHAT_PARAMS: >-
+            {"extensions" : {"Behat\\MinkExtension" : {"base_url" :
+            "http://nginx/"}, "Drupal\\DrupalExtension" : {"drush" :   {
+            "root":  "/app/web" }}}}
+  node:
+    type: node:10
+    run:
+      - "cd $LANDO_MOUNT && npm install"
+      - "cd $LANDO_MOUNT && gulp"
+    globals:
+      gulp-cli: "latest"
+tooling:
+  drush:
+    service: appserver
+    description: "Run Drush: lando drush"
+    cmd:
+      - "/app/vendor/bin/drush"
+      - "--root=/app/web"
+  npm:
+    service: node
+    description: "Run NPM: lando npm"
+  node:
+    service: node
+    description: "Run NodeJS: lando node"
+  gulp:
+    service: node
+    description: "Run Gulp: lando gulp"
+
+  phplint:
+    service: appserver
+    cmd: /app/vendor/bin/phplint
+  phpcs:
+    service: appserver
+    cmd: /app/vendor/bin/phpcs
+  phpunit:
+    service: appserver
+    description: "Run PHP Unit tests: lando phpunit"
+    cmd: composer unit-test
+  behat:
+    service: appserver
+    cmd: /app/vendor/bin/behat
+  phantomjs:
+    service: appserver
+    cmd: /srv/bin/phantomjs
+
+  wkhtmltopdf:
+    service: appserver
+    cmd: /srv/bin/wkhtmltopdf
+  tika:
+    service: appserver
+    cmd: java -jar /srv/bin/tika-app-1.1.jar

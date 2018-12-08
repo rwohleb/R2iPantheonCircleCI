@@ -1,0 +1,19 @@
+{
+	"name": "ckeditor/wordcount",
+	"description": "WordCount Plugin for CKEditor Editor",
+  "version": "1.17",
+	"type": "drupal-library",
+	"keywords": [ "ckeditor", "editor", "wysiwyg", "html", "richtext", "text", "javascript" ],
+	"homepage": "https://ckeditor.com/cke4/addon/wordcount",
+	"license": [ "MIT" ],
+	"authors": [
+		{
+			"name":  "w8tcha",
+			"homepage": "https://github.com/w8tcha"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/w8tcha/CKEditor-WordCount-Plugin/issues",
+		"source": "https://github.com/w8tcha/CKEditor-WordCount-Plugin"
+	}
+}
